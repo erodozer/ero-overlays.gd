@@ -1,0 +1,153 @@
+[gd_scene load_steps=12 format=3 uid="uid://jt4qr8jtqucn"]
+
+[ext_resource type="Script" path="res://components/garage/garage.gd" id="1_eqoxy"]
+[ext_resource type="FontVariation" uid="uid://btfqwd4vt7ech" path="res://assets/pixel_font/pixel_font.tres" id="1_er47u"]
+[ext_resource type="Script" path="res://components/garage/remote_storage.gd" id="2_j7xwn"]
+[ext_resource type="PackedScene" uid="uid://23i3xrkva0hr" path="res://components/raid/raid.tscn" id="2_y8q8p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17l13"]
+content_margin_left = 6.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.980392, 0.717647, 0.0862745, 1)
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_q1evb"]
+font = ExtResource("1_er47u")
+font_size = 24
+shadow_color = Color(0, 0, 0, 0.862745)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o4x8x"]
+font = ExtResource("1_er47u")
+font_size = 24
+font_color = Color(0, 0, 0, 0.603922)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_aap3a"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Animation" id="Animation_ka2uf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Notification:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 785)]
+}
+
+[sub_resource type="Animation" id="Animation_7poti"]
+resource_name = "notification"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Notification:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 3, 3.5),
+"transitions": PackedFloat32Array(0.5, 1, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 785), Vector2(0, 577), Vector2(0, 577), Vector2(0, 785)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4nf47"]
+_data = {
+"RESET": SubResource("Animation_ka2uf"),
+"notification": SubResource("Animation_7poti")
+}
+
+[node name="Garage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eqoxy")
+
+[node name="Raid" parent="." instance=ExtResource("2_y8q8p")]
+unique_name_in_owner = true
+
+[node name="RemoteStorage" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_j7xwn")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(570, 320)
+
+[node name="Car" type="Node3D" parent="SubViewport"]
+unique_name_in_owner = true
+transform = Transform3D(0.697165, 0, 0.716911, 0, 1, 0, -0.716911, 0, 0.697165, 0, 0, 0)
+
+[node name="hpnvn_cdo" parent="SubViewport/Car" instance_placeholder="res://assets/cars/hpnvn.cdo"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-4.37114e-08, 0.27228, -0.962218, 0, 0.962218, 0.27228, 1, 1.19017e-08, -4.20599e-08, -5.882, 1.929, 0)
+fov = 42.4
+
+[node name="Notification" type="Control" parent="."]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 785.0
+offset_right = 480.0
+offset_bottom = 785.0
+grow_vertical = 0
+
+[node name="Panel" type="PanelContainer" parent="Notification"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_17l13")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Notification/Panel"]
+layout_mode = 2
+
+[node name="Username" type="Label" parent="Notification/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "BigLongUsernameToTestThingsOut"
+label_settings = SubResource("LabelSettings_q1evb")
+
+[node name="Message" type="Label" parent="Notification/Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Acquired a Honda Prelude '99"
+label_settings = SubResource("LabelSettings_o4x8x")
+
+[node name="CarPreview" type="TextureRect" parent="Notification"]
+custom_minimum_size = Vector2(256, 128)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_aap3a")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4nf47")
+}

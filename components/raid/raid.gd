@@ -1,8 +1,9 @@
 extends Node
 
-const GT2_GDO = preload("res://addons/gt_importer/gdo.gd")
+const RemoteStorage = preload("res://components/garage/remote_storage.gd")
 
 @export var tmi: Tmi
+@export var remote: RemoteStorage
 
 func _on_twitch_command(type, event):
 	if type != Tmi.EventType.RAID:
@@ -14,21 +15,19 @@ func _on_twitch_command(type, event):
 	if !profile:
 		return
 	
-	var profile_image = await tmi.twitch_api.fetch_profile_image(profile)
+	await tmi.twitch_api.fetch_profile_image(profile)
 	
 	# fetch car data
 	# TODO interface with supabase
 	
-	var car = preload("res://assets/cars/hpnvn.cdo").instantiate()
+	var car = await remote.get_user_car(event.user.id)
+	if car == null:
+		return
 	
-	GT2_GDO.apply_palette(
-		car,
-		2
-	)
 	%World.add_child(car)
 	
 	# attach particles to the new car
-	var box = (car.get_node("lod_0") as MeshInstance3D).get_aabb()
+	var box = (car.get_node("body") as MeshInstance3D).get_aabb()
 	var tail = box.get_center() + ( box.get_longest_axis() * box.get_longest_axis_size() * .7)	
 	var smoke = %World/%Smoke
 	smoke.reparent(car)
@@ -64,7 +63,7 @@ func _on_twitch_command(type, event):
 		(%UserName as Label).force_update_transform()
 		await get_tree().process_frame
 
-	%ProfileImage.texture = profile_image
+	%ProfileImage.texture = profile.extra["profile_image"]
 	
 	anim.play("startup")
 	await anim.animation_finished

@@ -102,13 +102,11 @@ size_flags_horizontal = 3
 editable = false
 
 [node name="Label6" type="Label" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer2"]
-visible = false
 layout_mode = 2
 text = "Token User Id"
 
 [node name="UserId" type="LineEdit" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false

@@ -175,11 +175,14 @@ func _ready():
 	)
 	
 	(get_node("%TestRaid") as Button).pressed.connect(func ():
-		tmi.command.emit("raid", {
-			"user": {
-				"id": tmi.credentials.broadcaster_user_id
-			},
-		})
+		tmi.command.emit(
+			Tmi.EventType.RAID, 
+			{
+				"user": {
+					"id": tmi.credentials.broadcaster_user_id
+				},
+			}
+		)
 	)
 	
 	(get_node("%SupaTwitchButton") as Button).pressed.connect(func ():
