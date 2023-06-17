@@ -2,6 +2,18 @@ extends Window
 
 const LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
+const REQUIRED_SCOPES = [
+				"chat:read", "chat:edit",
+				"moderator:read:chatters",
+				"moderator:read:followers", "channel:read:subscriptions",
+				"bits:read",
+				"channel:read:redemptions",
+				"channel:read:polls", "channel:read:predictions",
+				"channel:read:hype_train",
+				"channel:read:charity", "channel:read:goals",
+				"moderator:read:shoutouts",
+			]
+
 @export var tmi: Tmi
 
 signal send_bubble(text)
@@ -71,11 +83,11 @@ func _save_config_to_disk():
 func _build_credentials():
 	var credentials = TwitchCredentials.new()
 	credentials.channel = %ChannelName.text
+	credentials.client_id = %ClientId.text
+	credentials.client_secret = %ClientSecret.text
 	credentials.broadcaster_user_id = %BroadcasterId.text
 	credentials.bot_id = %BotId.text
 	credentials.user_id = %UserId.text
-	credentials.client_id = %ClientId.text
-	credentials.client_secret = %ClientSecret.text
 	credentials.token = %AccessToken.text
 	credentials.refresh_token = %RefreshToken.text
 	
@@ -127,17 +139,7 @@ func _ready():
 		# get the initial token command required in case refresh token is waaaay too old
 		# guarantees the system will have all the permissions necessary
 		DisplayServer.clipboard_set(
-			"twitch token -u -s \"%s\"" % " ".join([
-				"chat:read", "chat:edit",
-				"moderator:read:chatters",
-				"moderator:read:followers", "channel:read:subscriptions",
-				"bits:read",
-				"channel:read:redemptions",
-				"channel:read:polls", "channel:read:predictions",
-				"channel:read:hype_train",
-				"channel:read:charity", "channel:read:goals",
-				"moderator:read:shoutouts",
-			])
+			"twitch token -u -s \"%s\"" % " ".join(REQUIRED_SCOPES)
 		)
 	)
 	
@@ -173,14 +175,25 @@ func _ready():
 	)
 	
 	(get_node("%TestRaid") as Button).pressed.connect(func ():
-		tmi.command.emit("raid", {})
+		tmi.command.emit("raid", {
+			"user": {
+				"id": tmi.credentials.broadcaster_user_id
+			},
+		})
 	)
 	
 	(get_node("%SupaTwitchButton") as Button).pressed.connect(func ():
 		pass
 	)
 	
-	tmi.credentials_updated.connect(self._on_twitch_credentials_updated)
+	(get_node("%OAuthLogin") as Button).pressed.connect(func ():
+		tmi.get_node("OAuth").poll_local(
+			%ChannelName.text,
+			%ClientId.text,
+			%ClientSecret.text,
+			REQUIRED_SCOPES
+		)
+	)
 	
 	if %Autoconnect.is_pressed():
 		tmi.start(false)

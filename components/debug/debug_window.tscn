@@ -102,21 +102,25 @@ size_flags_horizontal = 3
 editable = false
 
 [node name="Label6" type="Label" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer2"]
+visible = false
 layout_mode = 2
 text = "Token User Id"
 
 [node name="UserId" type="LineEdit" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
 
 [node name="Label8" type="Label" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer2"]
+visible = false
 layout_mode = 2
 text = "Broadcaster Id"
 
 [node name="BroadcasterId" type="LineEdit" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 editable = false
@@ -151,11 +155,13 @@ size_flags_horizontal = 3
 secret = true
 
 [node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer2"]
+visible = false
 layout_mode = 2
 text = "Refresh Token"
 
 [node name="RefreshToken" type="LineEdit" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 secret = true
@@ -170,6 +176,13 @@ custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Copy CLI Cmd"
+
+[node name="OAuthLogin" type="Button" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "OAuth Connect"
 
 [node name="ForceRefreshToken" type="Button" parent="ScrollContainer/VBoxContainer/Twitch Controls/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true

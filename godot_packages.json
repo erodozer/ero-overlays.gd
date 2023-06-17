@@ -4,5 +4,11 @@
     },
     {
         "git": "erodozer/tmi.gd"
-    }
+    },
+    {
+        "git": "erodozer/magic-dumps"
+    },
+	{
+		"git": "meaf75/godottpd-http-request-fix"
+	}
 ]

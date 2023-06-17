@@ -10,6 +10,10 @@ func _on_twitch_command(type, event):
 	
 	# fetch profile image
 	var profile = await tmi.twitch_api.fetch_user(event.user.id)
+	
+	if !profile:
+		return
+	
 	var profile_image = await tmi.twitch_api.fetch_profile_image(profile)
 	
 	# fetch car data
@@ -19,7 +23,6 @@ func _on_twitch_command(type, event):
 	
 	GT2_GDO.apply_palette(
 		car,
-		car.get_meta("colors"),
 		2
 	)
 	%World.add_child(car)

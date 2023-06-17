@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                await fetch(`/auth?${document.location.hash.substring(1)}`);
+            });
+        </script>
+    </head>
+    <body>
+        You may now close the browser window
+    </body>
+</html>
