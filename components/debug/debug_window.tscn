@@ -27,13 +27,7 @@ HSeparator/constants/separation = 32
 HSeparator/styles/separator = SubResource("StyleBoxLine_jryg6")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_moot8")
 
-[node name="DebugControls" type="Window"]
-snap_2d_transforms_to_pixel = true
-snap_2d_vertices_to_pixel = true
-initial_position = 1
-size = Vector2i(480, 600)
-extend_to_title = true
-content_scale_mode = 1
+[node name="DebugControls" type="Node"]
 script = ExtResource("1_tjxpa")
 
 [node name="ColorRect" type="ColorRect" parent="."]
