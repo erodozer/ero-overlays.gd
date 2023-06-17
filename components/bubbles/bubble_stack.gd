@@ -1,7 +1,7 @@
 extends Control
 
+@export var tmi: Tmi
 @export var listen_to_twitch = true
-@export var broadcaster_id = "erodozer"
 
 @export var message_limit = 3
 
@@ -49,7 +49,7 @@ func _on_twitch_command(type, event):
 	if type != "message":
 		return
 		
-	if event.tags['display-name'] != broadcaster_id:
+	if event.sender.id != tmi.credentials.broadcaster_user_id:
 		return
 
 	_push_to_stack(event.text)

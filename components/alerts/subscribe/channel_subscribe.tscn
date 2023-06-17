@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1uxsolaycg4r"]
 
-[ext_resource type="Script" path="res://components/alerts/redeems/redeem_yippee.gd" id="1_pmvpa"]
+[ext_resource type="Script" path="res://components/alerts/subscribe/channel_subscribe.gd" id="1_h2pp6"]
 [ext_resource type="FontVariation" uid="uid://btfqwd4vt7ech" path="res://assets/pixel_font/pixel_font.tres" id="3_ab5fn"]
 [ext_resource type="VideoStream" path="res://components/alerts/subscribe/subscribe.ogv" id="3_ii81i"]
 
@@ -82,11 +82,14 @@ _data = {
 [node name="SubscribeAlert" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_pmvpa")
+offset_left = 471.0
+offset_top = 129.0
+offset_right = 471.0
+offset_bottom = 129.0
+script = ExtResource("1_h2pp6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
-autoplay = "show"
 libraries = {
 "": SubResource("AnimationLibrary_gqrug")
 }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccenwry0rkni4"]
+[gd_scene load_steps=6 format=3 uid="uid://ccenwry0rkni4"]
 
 [ext_resource type="PackedScene" uid="uid://chays4n5ylcvm" path="res://components/clock/clock.tscn" id="1_rcgxh"]
 [ext_resource type="PackedScene" uid="uid://d2mvk45vkp64l" path="res://components/bubbles/bubble_stack.tscn" id="2_jwnk4"]
 [ext_resource type="PackedScene" uid="uid://b4bwtfne1effe" path="res://components/alerts/redeems/redeem_yippee.tscn" id="3_w4fpk"]
 [ext_resource type="PackedScene" uid="uid://jt4qr8jtqucn" path="res://components/garage/garage.tscn" id="4_5pan8"]
+[ext_resource type="PackedScene" uid="uid://c1uxsolaycg4r" path="res://components/alerts/subscribe/channel_subscribe.tscn" id="4_mt1tx"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -30,6 +31,7 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="StreamerBubbles" parent="Frame" instance=ExtResource("2_jwnk4")]
+unique_name_in_owner = true
 layout_mode = 1
 
 [node name="RedeemYippee" parent="Frame" instance=ExtResource("3_w4fpk")]
@@ -37,6 +39,8 @@ offset_left = 396.0
 offset_top = 109.0
 offset_right = 396.0
 offset_bottom = 109.0
+
+[node name="SubscribeAlert" parent="Frame" instance=ExtResource("4_mt1tx")]
 
 [node name="Garage" parent="Frame" instance=ExtResource("4_5pan8")]
 layout_mode = 1

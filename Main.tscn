@@ -49,12 +49,11 @@ transparent = true
 
 [node name="ForegroundOverlays" parent="ForegroundOverlays" instance=ExtResource("4_4wwpd")]
 
-[node name="Garage" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="3" node_paths=PackedStringArray("tmi")]
+[node name="StreamerBubbles" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="1" node_paths=PackedStringArray("tmi")]
 tmi = NodePath("../../../../Twitch")
 
-[node name="Notification" parent="ForegroundOverlays/ForegroundOverlays/Frame/Garage" index="3"]
-offset_top = 65.0
-offset_bottom = 65.0
+[node name="Garage" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="4" node_paths=PackedStringArray("tmi")]
+tmi = NodePath("../../../../Twitch")
 
 [node name="CarPreview" parent="ForegroundOverlays/ForegroundOverlays/Frame/Garage/Notification" index="1"]
 texture = SubResource("ViewportTexture_qc2nn")
