@@ -355,9 +355,9 @@ mesh = SubResource("QuadMesh_qurut")
 transform = Transform3D(1.057, 0, 0, 0, 1.057, 0, 0, 0, 1.057, 61.797, -2.189, 49.363)
 mesh = SubResource("QuadMesh_s504t")
 
-[node name="Car" parent="." instance_placeholder="res://assets/cars/hpnvn.cdo"]
+[node name="Car" parent="." instance_placeholder="res://assets/cars/a2azn.scn"]
 unique_name_in_owner = true
-transform = Transform3D(0.952276, -0.0496524, -0.301173, 0.0798814, 0.992833, 0.0888943, 0.2946, -0.10871, 0.949417, -20, 0, -5.624)
+transform = Transform3D(0.952276, -0.0496525, -0.301172, 0.0798814, 0.992833, 0.0888943, 0.2946, -0.10871, 0.949417, -20, 0, -5.624)
 
 [node name="Smoke" parent="Car" instance=ExtResource("2_yd5b5")]
 unique_name_in_owner = true

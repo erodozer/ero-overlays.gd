@@ -4,7 +4,7 @@
 
 [node name="Chatbox" type="VBoxContainer"]
 custom_minimum_size = Vector2(320, 0)
-anchors_preset = -1
+anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,3 +12,8 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 80
 script = ExtResource("1_nvllb")
+
+[node name="Message" parent="." instance_placeholder="res://components/chatbox/chatmessage.tscn"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "wow that's some cool shit"

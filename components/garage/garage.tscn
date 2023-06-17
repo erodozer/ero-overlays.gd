@@ -88,7 +88,7 @@ size = Vector2i(570, 320)
 unique_name_in_owner = true
 transform = Transform3D(0.697165, 0, 0.716911, 0, 1, 0, -0.716911, 0, 0.697165, 0, 0, 0)
 
-[node name="hpnvn_cdo" parent="SubViewport/Car" instance_placeholder="res://assets/cars/hpnvn.cdo"]
+[node name="Placeholder" parent="SubViewport/Car" instance_placeholder="res://assets/cars/a2azn.scn"]
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(-4.37114e-08, 0.27228, -0.962218, 0, 0.962218, 0.27228, 1, 1.19017e-08, -4.20599e-08, -5.882, 1.929, 0)

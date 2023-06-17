@@ -3,3 +3,6 @@
 
 # ignore car assets dumped from GT2
 assets/cars
+
+# ignore compiled versions of the app
+bin/
