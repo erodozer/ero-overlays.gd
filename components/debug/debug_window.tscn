@@ -318,6 +318,21 @@ custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 text = "Test Raid"
 
+[node name="Marquee Controls" type="PanelContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Marquee Controls"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Marquee Controls/VBoxContainer"]
+layout_mode = 2
+text = "Banner Control"
+
+[node name="MarqueeReset" type="Button" parent="ScrollContainer/VBoxContainer/Marquee Controls/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset Marquee Text"
+
 [node name="Gif Helper" type="PanelContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -343,17 +358,17 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Open File..."
 
-[node name="Gif Helper2" type="PanelContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="Garage Helper" type="PanelContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Gif Helper2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/Garage Helper"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Gif Helper2/VBoxContainer"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Garage Helper/VBoxContainer"]
 layout_mode = 2
 text = "Supabase Session"
 
-[node name="SupaTwitchButton" type="Button" parent="ScrollContainer/VBoxContainer/Gif Helper2/VBoxContainer"]
+[node name="SupaTwitchButton" type="Button" parent="ScrollContainer/VBoxContainer/Garage Helper/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Login with Twitch

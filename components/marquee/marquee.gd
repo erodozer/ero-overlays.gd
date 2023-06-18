@@ -2,9 +2,6 @@ extends HBoxContainer
 
 @export_range(0, 999) var scroll_speed = 10
 
-func _ready():
-	build_marquee(%LabelA.text)
-
 func _process(delta):
 	position.x -= scroll_speed * delta
 	if %Spacer.global_position.x + %Spacer.size.x < 0:

@@ -107,12 +107,7 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_3xiaq"]
 font_size = 24
 
-[node name="FollowAlert" type="Control"]
-custom_minimum_size = Vector2(1280, 720)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1280.0
-offset_bottom = 720.0
+[node name="FollowAlert" type="Node"]
 script = ExtResource("1_sajvf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -121,15 +116,13 @@ libraries = {
 }
 
 [node name="Anchor" type="Control" parent="."]
+texture_filter = 1
 custom_minimum_size = Vector2(1280, 48)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 3
+anchors_preset = 0
+offset_top = 360.0
+offset_right = 1280.0
+offset_bottom = 408.0
 scale = Vector2(1, 1e-05)
 pivot_offset = Vector2(640, 24)
 

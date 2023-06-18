@@ -78,6 +78,7 @@ libraries = {
 
 [node name="Anchor" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0)
+texture_filter = 1
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 39.9999

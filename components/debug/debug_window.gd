@@ -198,6 +198,10 @@ func _ready():
 		)
 	)
 	
+	(get_node("%MarqueeReset") as Button).pressed.connect(func ():
+		get_parent().get_node("BackgroundOverlays/BackgroundOverlays/%Marquee").reset()
+	)
+	
 	if %Autoconnect.is_pressed():
 		tmi.start(false)
 

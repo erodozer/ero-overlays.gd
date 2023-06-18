@@ -12,10 +12,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Marquee" parent="." instance=ExtResource("1_nvm7u")]
-layout_mode = 0
-anchors_preset = 0
+unique_name_in_owner = true
 
 [node name="Chatbox" parent="." instance=ExtResource("2_t6glh")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
 offset_left = -1.0

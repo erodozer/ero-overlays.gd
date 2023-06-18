@@ -61,6 +61,10 @@ tmi = NodePath("../../../../Twitch")
 [node name="Garage" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="5" node_paths=PackedStringArray("tmi")]
 tmi = NodePath("../../../../Twitch")
 
+[node name="Notification" parent="ForegroundOverlays/ForegroundOverlays/Frame/Garage" index="3"]
+offset_top = 65.0
+offset_bottom = 65.0
+
 [node name="CarPreview" parent="ForegroundOverlays/ForegroundOverlays/Frame/Garage/Notification" index="1"]
 texture = SubResource("ViewportTexture_qc2nn")
 
