@@ -53,15 +53,17 @@ func _load_config_from_disk():
 		%ExcludeCommands.text = " ".join(exclude_commands)
 		update_ignore_commands_list.emit(exclude_commands)
 	
+		%BubblesVisible.button_pressed = data.chat.get("bubbles", true)
+		get_parent().get_node("ForegroundOverlays/ForegroundOverlays/Frame/StreamerBubbles").visible = data.chat.get("bubbles", true)
+		
 	%Autoconnect.set_pressed_no_signal(data.get("autoconnect", false))
 	
 func _save_config_to_disk():
-	var file = FileAccess.open("user://tmi.json", FileAccess.WRITE)
 	
-	var exclude_users = %ExcludeUsers.text.split("\\s", false)
-	var exclude_commands = %ExcludeCommands.text.split("\\s", false)
+	var exclude_users = %ExcludeUsers.text.split(" ", false)
+	var exclude_commands = %ExcludeCommands.text.split(" ", false)
 	
-	file.store_string(JSON.stringify({
+	var config = JSON.stringify({
 		"credentials": {
 			"channel": %ChannelName.text,
 			"bot_id": %BotId.text,
@@ -76,8 +78,12 @@ func _save_config_to_disk():
 		"chat": {
 			"exclude_users": exclude_users,
 			"exclude_commands": exclude_commands,
+			"bubbles": %BubblesVisible.button_pressed
 		},
-	}, "\t"))
+	}, "\t")
+	
+	var file = FileAccess.open("user://tmi.json", FileAccess.WRITE)
+	file.store_string(config)
 	file.close()
 	
 func _build_credentials():
@@ -147,7 +153,7 @@ func _ready():
 		var input = (get_node("%ExcludeUsers") as TextEdit).text
 		
 		update_ignore_users_list.emit(
-			input.split("\\s", false)
+			input.split(" ", false)
 		)
 		
 		_save_config_to_disk()
@@ -155,7 +161,7 @@ func _ready():
 	
 	(get_node("%ExcludeCommands") as LineEdit).text_changed.connect(func (input: String):
 		update_ignore_commands_list.emit(
-			input.split("\\s", false)
+			input.split(" ", false)
 		)
 		
 		_save_config_to_disk()
@@ -201,6 +207,11 @@ func _ready():
 	(get_node("%MarqueeReset") as Button).pressed.connect(func ():
 		get_parent().get_node("BackgroundOverlays/BackgroundOverlays/%Marquee").reset()
 	)
+	
+	(get_node("%BubblesVisible") as CheckButton).toggled.connect(func (pressed):
+		get_parent().get_node("ForegroundOverlays/ForegroundOverlays/Frame/StreamerBubbles").visible = pressed
+	)
+	
 	
 	if %Autoconnect.is_pressed():
 		tmi.start(false)
