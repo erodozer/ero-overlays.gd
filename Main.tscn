@@ -52,7 +52,13 @@ transparent = true
 [node name="StreamerBubbles" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="1" node_paths=PackedStringArray("tmi")]
 tmi = NodePath("../../../../Twitch")
 
-[node name="Garage" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="4" node_paths=PackedStringArray("tmi")]
+[node name="SubscribeAlert" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="3" node_paths=PackedStringArray("tmi")]
+tmi = NodePath("../../../../Twitch")
+
+[node name="FollowAlert" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="4" node_paths=PackedStringArray("tmi")]
+tmi = NodePath("../../../../Twitch")
+
+[node name="Garage" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="5" node_paths=PackedStringArray("tmi")]
 tmi = NodePath("../../../../Twitch")
 
 [node name="CarPreview" parent="ForegroundOverlays/ForegroundOverlays/Frame/Garage/Notification" index="1"]
@@ -69,7 +75,10 @@ transparent = true
 
 [node name="BackgroundOverlays" parent="BackgroundOverlays" instance=ExtResource("5_20kdc")]
 
-[node name="Chatbox" parent="BackgroundOverlays/BackgroundOverlays" index="0"]
+[node name="Marquee" parent="BackgroundOverlays/BackgroundOverlays" index="0" node_paths=PackedStringArray("tmi")]
+tmi = NodePath("../../../Twitch")
+
+[node name="Chatbox" parent="BackgroundOverlays/BackgroundOverlays" index="1"]
 anchors_preset = -1
 offset_left = -332.0
 offset_top = 48.0

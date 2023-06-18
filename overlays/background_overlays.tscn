@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcqqjjenx87m0"]
+[gd_scene load_steps=3 format=3 uid="uid://bcqqjjenx87m0"]
 
+[ext_resource type="PackedScene" uid="uid://qs3hfywstir1" path="res://components/marquee/marquee.tscn" id="1_nvm7u"]
 [ext_resource type="PackedScene" uid="uid://dcj1k1861jbkj" path="res://components/chatbox/chatbox.tscn" id="2_t6glh"]
 
 [node name="BackgroundOverlays" type="Control"]
@@ -9,6 +10,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Marquee" parent="." instance=ExtResource("1_nvm7u")]
+layout_mode = 0
+anchors_preset = 0
 
 [node name="Chatbox" parent="." instance=ExtResource("2_t6glh")]
 custom_minimum_size = Vector2(300, 0)
