@@ -129,7 +129,24 @@ func _ready():
 	)
 	
 	(get_node("%DebugBubbleChat") as Button).pressed.connect(func():
-		send_bubble.emit(LOREM_IPSUM.substr(0, (randi() % len(LOREM_IPSUM)) + 1))
+		var message = LOREM_IPSUM.substr(0, (randi() % len(LOREM_IPSUM)) + 1)
+		tmi.command.emit(
+			Tmi.EventType.CHAT_MESSAGE,
+			{
+				"id": "0",
+				"channel": "erodozer",
+				"text": message,
+				"raw_message": message,
+				"tags": [],
+				"sender": {
+					"id": "erodozer",
+					"display_name": "erodozer",
+					"is_loading": false,
+					"extra": {},
+				},
+			}
+		)
+		send_bubble.emit(message)
 	)
 
 	(get_node("%ForceRefreshToken") as Button).pressed.connect(func ():

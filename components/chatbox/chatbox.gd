@@ -5,13 +5,20 @@ extends Control
 @export var ignore_users: Array[String] = []
 @export var ignore_commands: Array[String] = []
 
+@onready var layout = %Layout
+@onready var content_width = self.get_rect().size.x - 32
+
 const CACHE_LIMIT = 500
 const cached_emotes = {}
 
 func _process(_delta):
 	# continuously cleanup
-	if get_child_count() > message_limit:
-		get_child(0).queue_free()
+	if layout.get_child_count() > message_limit:
+		var pop = layout.get_children().pop_back()
+		pop.queue_free()
+		if pop.has_meta("tween"):
+			var tween: Tween = pop.get_meta("tween")
+			tween.stop()
 
 func _spawn_chat(event):
 	# do not render messages that are bot commands
@@ -30,12 +37,19 @@ func _spawn_chat(event):
 	
 	var text = preload("./chatmessage.tscn").instantiate()
 	text.text = event.text
-	text.custom_minimum_size = Vector2(size.x, 16)
-	add_child(text)
+	text.custom_minimum_size = Vector2(content_width, 16)
+	layout.add_child(text)
 	text.size_flags_horizontal = Control.SIZE_EXPAND | Control.SIZE_SHRINK_END
-	text.custom_minimum_size = Vector2(min(text.get_content_width(), text.size.x), 16)
-	text.pivot_offset = Vector2(text.custom_minimum_size.x, text.size.y)
+	text.custom_minimum_size = Vector2(min(text.get_content_width(), content_width), 16)
+	text.pivot_offset = Vector2(text.custom_minimum_size.x + 16, -24)
 	text.set_meta("messageid", event.id)
+	layout.remove_child(text)
+	
+	var box = Control.new()
+	box.add_child(text)
+	box.custom_minimum_size = Vector2(content_width, 0)
+	layout.add_child(box)
+	layout.move_child(box, 0)
 	
 	# inject user profile information
 	if "sender" in event:
@@ -56,21 +70,39 @@ func _spawn_chat(event):
 	# spawn in message
 	var t = create_tween()
 	t.tween_property(text, "scale", Vector2(1.0, 1.0), 0.2)\
-		.from(Vector2(0.0, 0.0))
+		.from(Vector2(0.0, 0.0))\
+		.set_delay(0.1)\
+		.set_ease(Tween.EASE_IN_OUT)
+	t.parallel().tween_property(text, "modulate", Color.WHITE, 0.1)\
+		.from(Color.TRANSPARENT)\
+		.set_delay(0.1)\
+		.set_ease(Tween.EASE_IN_OUT)
+	t.parallel().tween_property(box, "custom_minimum_size", Vector2(content_width, text.get_rect().size.y + 64), 0.2)\
+		.from(Vector2(content_width, 0.0))\
+		.set_ease(Tween.EASE_IN_OUT)
+	
+	text.scale = Vector2(0,0)
+	text.modulate = Color.TRANSPARENT
+		
 	if expire_delay > 0.0:
+		t = create_tween()
 		t.tween_property(text, "modulate", Color.TRANSPARENT, 0.2)\
-			.set_delay(expire_delay)
-		t.tween_property(text, "clip_contents", true, 0.0)
-		t.tween_property(text, "size", Vector2(0.0, 0.0), 0.15)
-		t.tween_callback(text.queue_free)
+			.set_delay(expire_delay + 0.2)
+		t.parallel().tween_property(box, "custom_minimum_size", Vector2(0.0, 0.0), 0.15).set_delay(expire_delay + 0.2)
+		t.tween_callback(
+			func ():
+				if box != null:
+					box.queue_free()
+		)
+		box.set_meta("tween", t)
 			
 func _delete_user_messages(user_id: String):
-	for i in get_children():
+	for i in layout.get_children():
 		if i.get_meta("senderid") == user_id:
 			i.queue_free()
 					
 func _delete_message(message_id: String):
-	for i in get_children():
+	for i in layout.get_children():
 		if i.get_meta("messageid") == message_id:
 			i.queue_free()
 

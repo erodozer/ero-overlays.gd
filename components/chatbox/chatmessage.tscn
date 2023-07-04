@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://s1pfwctfb3we"]
 
 [ext_resource type="FontVariation" uid="uid://btfqwd4vt7ech" path="res://assets/pixel_font/pixel_font.tres" id="1_6qj4k"]
 [ext_resource type="Texture2D" uid="uid://cca7gqjkm3pma" path="res://components/chatbox/profile_image_mask.png" id="1_hj5fy"]
@@ -10,10 +10,10 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-expand_margin_left = 16.0
-expand_margin_top = 16.0
-expand_margin_right = 16.0
-expand_margin_bottom = 16.0
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68ff8"]
 content_margin_left = 14.0
@@ -43,6 +43,7 @@ expand_margin_right = 14.0
 expand_margin_bottom = 6.0
 
 [node name="Message" type="RichTextLabel"]
+texture_filter = 1
 clip_contents = false
 custom_minimum_size = Vector2(0, 16)
 anchors_preset = 1
@@ -55,18 +56,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_colors/default_color = Color(0.498039, 0.439216, 0.317647, 1)
 theme_override_fonts/normal_font = ExtResource("1_6qj4k")
-theme_override_font_sizes/normal_font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_vqp7i")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
 
 [node name="Control" type="Control" parent="."]
+texture_filter = 4
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 6.0
 grow_horizontal = 0
+scale = Vector2(0.8, 0.8)
 
 [node name="Header" type="HBoxContainer" parent="Control"]
 custom_minimum_size = Vector2(0, 72)

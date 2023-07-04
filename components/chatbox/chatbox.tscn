@@ -1,19 +1,57 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcj1k1861jbkj"]
+[gd_scene load_steps=4 format=3 uid="uid://dcj1k1861jbkj"]
 
 [ext_resource type="Script" path="res://components/chatbox/chatbox.gd" id="1_nvllb"]
+[ext_resource type="FontVariation" uid="uid://btfqwd4vt7ech" path="res://assets/pixel_font/pixel_font.tres" id="2_lusij"]
 
-[node name="Chatbox" type="VBoxContainer"]
-custom_minimum_size = Vector2(320, 0)
-anchors_preset = 11
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gtmga"]
+content_margin_left = 24.0
+content_margin_top = 64.0
+content_margin_right = 32.0
+content_margin_bottom = 16.0
+
+[node name="Control" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 3
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_left = -340.0
+offset_bottom = 640.0
 grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/separation = 80
 script = ExtResource("1_nvllb")
 
-[node name="Message" parent="." instance_placeholder="res://components/chatbox/chatmessage.tscn"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/normal_font = ExtResource("2_lusij")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center][wave amp=50.0 freq=5.0]CHAT[/wave][/center]"
+fit_content = true
+
+[node name="Chatbox" type="PanelContainer" parent="VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gtmga")
+
+[node name="Layout" type="VBoxContainer" parent="VBoxContainer/Chatbox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Message" parent="VBoxContainer/Chatbox/Layout" instance_placeholder="res://components/chatbox/chatmessage.tscn"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 12
 text = "wow that's some cool shit"

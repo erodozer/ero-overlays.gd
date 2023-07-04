@@ -61,10 +61,6 @@ tmi = NodePath("../../../../Twitch")
 [node name="Garage" parent="ForegroundOverlays/ForegroundOverlays/Frame" index="5" node_paths=PackedStringArray("tmi")]
 tmi = NodePath("../../../../Twitch")
 
-[node name="Notification" parent="ForegroundOverlays/ForegroundOverlays/Frame/Garage" index="3"]
-offset_top = 65.0
-offset_bottom = 65.0
-
 [node name="CarPreview" parent="ForegroundOverlays/ForegroundOverlays/Frame/Garage/Notification" index="1"]
 texture = SubResource("ViewportTexture_qc2nn")
 
@@ -72,24 +68,17 @@ texture = SubResource("ViewportTexture_qc2nn")
 transparent_bg = true
 initial_position = 1
 title = "Background Overlays"
-size = Vector2i(1280, 720)
+size = Vector2i(1920, 1080)
 transient = true
 unresizable = true
 transparent = true
 
 [node name="BackgroundOverlays" parent="BackgroundOverlays" instance=ExtResource("5_20kdc")]
 
-[node name="Marquee" parent="BackgroundOverlays/BackgroundOverlays" index="0" node_paths=PackedStringArray("tmi")]
-tmi = NodePath("../../../Twitch")
-
-[node name="Chatbox" parent="BackgroundOverlays/BackgroundOverlays" index="1"]
-anchors_preset = -1
-offset_left = -332.0
+[node name="Chatbox" parent="BackgroundOverlays/BackgroundOverlays" index="0"]
 offset_top = 48.0
-offset_right = -32.0
-offset_bottom = -330.0
+offset_bottom = 748.0
 size_flags_horizontal = 1
-alignment = 2
 
 [connection signal="command" from="Twitch" to="ForegroundOverlays/ForegroundOverlays/Frame/StreamerBubbles" method="_on_twitch_command"]
 [connection signal="command" from="Twitch" to="ForegroundOverlays/ForegroundOverlays/Frame/RedeemYippee" method="_on_twitch_command"]
